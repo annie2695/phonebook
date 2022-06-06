@@ -1,0 +1,16 @@
+<form [formGroup]="contact" #formDirective="ngForm" (ngSubmit)="onSubmitForm(formDirective)">
+    <mat-form-field>
+        <mat-label>Display name</mat-label>
+        <input matInput formControlName="displayName" placeholder="Enter contact name">
+        <mat-error *ngIf="contact.controls['displayName'].hasError('alreadyExist')">
+            This contact <strong>already exist</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Phone</mat-label>
+        <input matInput formControlName="phone" mask="(000) 000-0000">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!contact.valid">Add new contact</button>
+</form>
