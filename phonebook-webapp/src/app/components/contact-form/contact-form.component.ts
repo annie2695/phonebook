@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { catchError } from 'rxjs';
+import { catchError, take } from 'rxjs';
 
 import { ContactApiService } from 'src/app/services/contact-api.service';
 
@@ -36,6 +36,7 @@ export class ContactFormComponent implements OnInit {
       this._service
         .addContact(this.contact.value)
         .pipe(
+          take(1),
           catchError((e: HttpErrorResponse) => {
             if (e.status === 409)
               this.contact.controls['displayName'].setErrors({
@@ -47,7 +48,7 @@ export class ContactFormComponent implements OnInit {
         )
         .subscribe(() => {
           formDirective.resetForm();
-          this.contact.reset({}, { emitEvent: false });
+          this.contact.reset();
 
           this._service.refreshContacts.emit();
         });
