@@ -4,9 +4,9 @@ Basic application to manage a phonebook.
 
 ## Prequisites
 1. You will need a Mongo database to save the Contact.
-2. You will need to install globally on your computer `NestJS`:
+2. You will need to install globally on your computer `NestJS` and `Angular CLI`:
 ```cmd
-npm install -g @nest/cli
+npm install -g @nest/cli @angular/cli
 ```
 
 ## Path to awesome
@@ -19,4 +19,12 @@ npm install -g @nest/cli
 cd phonebook-api
 npm install
 npm run start:dev
+```
+
+### Start the frontend project
+1. Run the project wwith this command:
+```bash
+cd phonebook-webapp
+npm install
+npm run start
 ```
