@@ -3,6 +3,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
+import { environment } from 'src/environments/environment';
 import { IContact, ICreateContactDto } from '../models/contact.model';
 
 /**
@@ -10,7 +11,7 @@ import { IContact, ICreateContactDto } from '../models/contact.model';
  */
 @Injectable({ providedIn: 'root' })
 export class ContactApiService {
-  readonly API_URL = 'http://localhost:3000';
+  readonly API_URL = `${environment.apiUrl}/contacts`;
   refreshContacts: EventEmitter<null>;
 
   constructor(private _http: HttpClient) {
@@ -18,10 +19,10 @@ export class ContactApiService {
   }
 
   addContact(contact: ICreateContactDto): Observable<IContact> {
-    return this._http.post<IContact>(`${this.API_URL}/contacts`, contact);
+    return this._http.post<IContact>(this.API_URL, contact);
   }
 
   getAll(): Observable<IContact[]> {
-    return this._http.get<IContact[]>(`${this.API_URL}/contacts`);
+    return this._http.get<IContact[]>(this.API_URL);
   }
 }
